@@ -1,0 +1,50 @@
+Universidade Federal da Fronteira Sul
+Ciência da Computação - Banco de Dados II
+Implementação de Buffer
+Por Gabrielle Souza e Lais Borin
+
+LEIA-ME
+
+Para utilizar a implementação, inclua a biblioteca de nome "func.h" sendo que suas funções são implementadas em "func.c"
+Incluiu-se no pacote uma main demostração.
+
+Dos parâmetros:
+
+Leia-se
+
+"meta" como o arquivo que contém os metadados (.dat);
+"data" como o arquivo que contém os dados a serem lidos (.dat);
+"buffer" como um vetor de BP páginas cada uma com SIZE tamanho(BP e SIZE, defines em func.h);
+"esquema" como uma estrutura criada a partir dos metadados que armazena nome, tipo e tamanho dos campos;
+"numPg" como o número de uma página específica;
+"numReg" como um número de um registro específico dentro de uma página;
+
+Das funções:
+
+Primeiramente, faz-se necessário a declaração de um buffer da seguinte maneira:
+1 - struct page *buffer = inicializaBuffer();
+Onde a função "inicializaBuffer()" devolve um buffer com BP páginas com tamanho SIZE de dados
+*BP e SIZE podem ser modificados no define da biblioteca func.h.
+
+Por seguinte, declarar um ponteiro para guardar o esquema:
+2 - struct CAMPOS *esquema = leMetadados(meta);
+Onde a função "leMetadados(meta)" devolve o esquema completo de dados de acordo com o arquivo informado.
+
+Agora tudo está pronto para trazer os dados até a memória.
+Utilize a função "carregaDados()" enviando por parâmetro o buffer, o nome do arquivo de dados, o nome do arquivos
+de metadados e por fim, o esquema criado anteriormente, exemplo:
+3 - carregaDados(buffer, data, meta, esquema);
+
+Com os dados posto no buffer, é dada a opção de mostrar todas as páginas que contenham registro usando
+a função "showBuffer(buffer, esquema, meta)" ou escolher mostrar um determinado registro em uma certa página do
+buffer utilizando a função "showTupleBuffer(buffer, esquema, meta, numPg, numReg)".
+
+Descrição sobre funções auxiliares, consultar func.c;
+
+Executado no Ubuntu 12.04
+Compilado com gcc version 4.6.3
+
+Para compilação digite no terminal:
+$ gcc *.c -o prog -Wall
+$ ./prog <metadados> <dados>
+
